@@ -1,21 +1,33 @@
 pipeline {
     agent any
 
-    environment {
-        PROJECT = "Linux Backporting"
-        AUTHOR = "Shilpa"
+    parameters {
+        string(
+            name: 'USERNAME',
+            defaultValue: 'Shilpa',
+            description: 'Enter your name'
+        )
+
+        choice(
+            name: 'BUILD_MODE',
+            choices: ['Debug', 'Release'],
+            description: 'Choose build mode'
+        )
+
+        booleanParam(
+            name: 'RUN_TESTS',
+            defaultValue: true,
+            description: 'Run test stage?'
+        )
     }
 
     stages {
 
-        stage('Environment Variables') {
+        stage('Print Parameters') {
             steps {
-                echo "Project Name: ${PROJECT}"
-                echo "Author Name: ${AUTHOR}"
-
-                sh 'echo "Workspace Path: $WORKSPACE"'
-                sh 'echo "Build Number: $BUILD_NUMBER"'
-                sh 'echo "Job Name: $JOB_NAME"'
+                echo "Hello ${params.USERNAME}"
+                echo "Build Mode: ${params.BUILD_MODE}"
+                echo "Run Tests: ${params.RUN_TESTS}"
             }
         }
 
