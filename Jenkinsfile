@@ -1,25 +1,21 @@
 pipeline {
     agent any
 
+    environment {
+        PROJECT = "Linux Backporting"
+        AUTHOR = "Shilpa"
+    }
+
     stages {
 
-        stage('Checkout Information') {
+        stage('Environment Variables') {
             steps {
-                echo 'Pipeline started successfully!'
-                sh 'pwd'
-                sh 'whoami'
-            }
-        }
+                echo "Project Name: ${PROJECT}"
+                echo "Author Name: ${AUTHOR}"
 
-        stage('Compile C Program') {
-            steps {
-                sh 'gcc hello.c -o hello'
-            }
-        }
-
-        stage('Run C Program') {
-            steps {
-                sh './hello'
+                sh 'echo "Workspace Path: $WORKSPACE"'
+                sh 'echo "Build Number: $BUILD_NUMBER"'
+                sh 'echo "Job Name: $JOB_NAME"'
             }
         }
 
