@@ -1,7 +1,8 @@
 #include <stdio.h>
 
 int main() {
-    printf("This is updated C code for analysis purpose
-\n");
+     printf("This is one of the
+ 
+updated C code for Analysis purpose\n");
     return 0;
 }
