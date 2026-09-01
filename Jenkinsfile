@@ -1,34 +1,26 @@
-
-pipeline {
+p
+ipeline {
     agent any
-
-    parameters {
-        string(
-            name: 'USERNAME',
-            defaultValue: 'Shilpa',
-            description: 'Enter your name'
-        )
-
-        choice(
-            name: 'BUILD_MODE',
-            choices: ['Debug', 'Release'],
-            description: 'Choose build mode'
-        )
-
-        booleanParam(
-            name: 'RUN_TESTS',
-            defaultValue: true,
-            description: 'Run test stage?'
-        )
-    }
 
     stages {
 
-        stage('Print Parameters') {
+        stage('Checkout Information') {
             steps {
-                echo "Hello ${params.USERNAME}"
-                echo "Build Mode: ${params.BUILD_MODE}"
-                echo "Run Tests: ${params.RUN_TESTS}"
+                echo 'Pipeline started successfully!'
+                sh 'pwd'
+                sh 'whoami'
+            }
+        }
+
+        stage('Compile C Program') {
+            steps {
+                sh 'gcc hello.c -o hello'
+            }
+        }
+
+        stage('Run C Program') {
+            steps {
+                sh './hello'
             }
         }
 
